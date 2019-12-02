@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo, { ReactComponent } from './logo.svg';
 import './App.css';
 import {Button} from "antd";
 
@@ -174,21 +174,43 @@ function CommitList(maxNumber) {
   );
 }
 
-function WriteCode(problem_id) {
-  return (
-    <div>
-      <Row>
-        <Col span={12}>
-          <TextArea rows={25} />
-        </Col>
-        <Col span={12}>
-          <TextArea rows={25} />
-        </Col>
-      </Row>
-      <Divider />
-      <Button key='commit'>提交</Button>
-    </div>
-  )
+const commit = (pid, code) => {
+  return (event) => {
+    alert(code)
+  }
+}
+
+class WriteCode extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      global_pid: 1,
+      global_code: "fmt.Println(\"hello world\")"
+    };
+  }
+
+  render(){
+    return (
+      <div>
+        <Row>
+          <Col span={12}>
+            <h2>{this.state.global_pid}</h2>
+            <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+          </Col>
+          <Col span={12}>
+            <TextArea rows={25} onChange={
+              (e)=>{
+                this.setState({global_pid: this.state.global_pid, global_code: e.target.value})
+              }
+            }/>
+          </Col>
+        </Row>
+        <Divider />
+        <Button key='commit' type="primary" onClick={commit(this.state.global_pid,this.state.global_code)}>提交</Button>
+      </div>
+    )
+  }
 }
 
 const NoMatch = () => (
