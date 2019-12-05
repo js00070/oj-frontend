@@ -105,6 +105,18 @@ const commit_columns = [
         })}
       </span>
     ),
+  },
+  {
+    title: '源码',
+    key: 'code',
+    dataIndex: 'code',
+    render: code => {
+      return (
+        <a onClick={()=>{alert(code)}}>
+          查看
+        </a>
+      )
+    }
   }
 ]
 
@@ -131,6 +143,14 @@ class CommitList extends React.Component{
     super(props);
     this.state = {
       commit_list: [
+        // {
+        //   key: '1',
+        //   commit_id: 1,
+        //   commit_time: '2019',
+        //   problem_title: {title: '测试', link: "/writecode"},
+        //   tags: {tags: ['error'], output: 'errorrrrr'},
+        //   code: 'helloword'
+        // }
       ]
     };
   }
@@ -158,6 +178,7 @@ class CommitList extends React.Component{
         obj.key = i
         obj.commit_id = cl[i]["ID"]
         obj.commit_time = cl[i]["CreatedAt"]
+        obj.code = cl[i]["Code"]
         obj.problem_title = {
           title: '排序',
           link: '/writecode'
@@ -229,7 +250,7 @@ class WriteCode extends React.Component {
           </Col>
         </Row>
         <Divider />
-        <Button key='commit' type="primary" onClick={commit(this.state.global_pid,this.state.global_code)}>提交</Button>
+        <Button key='commit' href='/commits/' type="primary" onClick={commit(this.state.global_pid,this.state.global_code)}>提交</Button>
       </div>
     )
   }
