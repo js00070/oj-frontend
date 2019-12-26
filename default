@@ -7,11 +7,6 @@ server {
         try_files $uri /index.html;
     }
 
-    location /login {
-        root   /usr/share/nginx/html;
-        try_files $uri /login.html;
-    }
-
     location /api/ {
         proxy_pass http://apiserver:8080;
     }
